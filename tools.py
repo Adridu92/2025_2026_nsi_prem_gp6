@@ -1,2 +1,3 @@
-quitting words: ["quit","ciao","byebye"]
-user_continues
+quitting words: ["quit","ciao","byebye","au revor","adios"]
+def user_continues () :
+
