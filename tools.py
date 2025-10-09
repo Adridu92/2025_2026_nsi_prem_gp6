@@ -1,0 +1,1 @@
+quitting words: ["quit","ciao","byebye"]
