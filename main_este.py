@@ -6,9 +6,10 @@ def main ():
     montrez_bienvenue_message ()
     while user_continues:
      entrez_code_pin ()
-
-     montrez_menu ()
-
+    if pin_good:
+         montrez_menu ()
+    else :
+        message_erreur()
 
    
 
