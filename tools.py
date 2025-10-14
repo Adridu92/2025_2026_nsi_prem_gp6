@@ -9,4 +9,7 @@ def demande_id () :
     demande_id =  imput ("Entrez votre id")
    
 def verifier_pin () :
-    verifier_pin = 
+    tentative=0
+    while tentatives < 3:
+         code_saisi = input("Entrez votre code PIN : ")
+         
