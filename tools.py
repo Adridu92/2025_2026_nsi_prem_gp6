@@ -34,4 +34,4 @@ def demarrer_distributeur():
     else:
         print("Fin du programme.")
 
-demarrer_distributeur(n)
+demarrer_distributeur()
