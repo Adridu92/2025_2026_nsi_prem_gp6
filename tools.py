@@ -1,3 +1,5 @@
+from databank import *
+
 def pin_good():
     pin = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193 ]
          
