@@ -9,5 +9,5 @@ def entrez_code_pin () :
     demande_id =  imput ("Entrez votre id")
    
 def pin_good():
-    pin=12
+    pin = [1013,1023,1033;1043,1063,1073,1093,1193]
          
