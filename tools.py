@@ -15,7 +15,7 @@ def entrer_code_pin():
         demande_id = input("Entrez votre code PIN (ou tapez 'quit' pour quitter) : ")
         
         if demande_id.lower() in quitting_words:
-            print("Vous avez quitté le programme. À bientôt !")
+            print("Vous avez quitté le programme, à bientôt !")
             return None
         
         try:
@@ -28,12 +28,4 @@ def entrer_code_pin():
         except:
             print("Vous devez entrer un nombre pour le code PIN.\n")
 
-def demarrer_distributeur():
-    message_de_bienvenue()
-    pin = entrer_code_pin()
-    if pin_is_not_None:
-        print("Bienvenue dans votre compte bancaire !")
-    else:
-        print("Fin du programme.")
 
-demarrer_distributeur()
