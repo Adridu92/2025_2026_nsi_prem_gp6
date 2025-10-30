@@ -31,7 +31,7 @@ def entrer_code_pin():
 def demarrer_distributeur():
     message_de_bienvenue()
     pin = entrer_code_pin()
-    if pin is not None:
+    if pin_is_not_None:
         print("Bienvenue dans votre compte bancaire !")
     else:
         print("Fin du programme.")
