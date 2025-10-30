@@ -29,3 +29,16 @@ def entrer_code_pin():
 
 def message_aurevoir()
     print("Merci d'avoir utilisé notre DAB, au revoir !")
+
+def déposer_argent(montant)
+    client["depots"].append([montant, today])
+    print("Dépôt effectué avec succès !")
+    print(f" Nouveau solde de {client['prenom']} {client['nom']} : {client['solde']} €")
+
+def get_clients_base():
+    if file_doesnt_exist("clients.json"):
+        clients_dict = make_clients_from_data(raw_clients)
+        save_python_dict_to_json_file(clients_dict, "clients.json")
+    else:
+        clients_dict = make_python_dict_from_json_file("clients.json")
+    return clients_dict
