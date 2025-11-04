@@ -1,127 +1,84 @@
-from databank import *
 import json
-def pin_good():
-    pin = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193 ]
-         
+import databank
+# Liste des codes PIN valides
+pins_valides = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
 
+# Liste des mots-clés pour quitter le programme
+quitting_words = ["quit", "ciao", "byebye", "au revoir", "adios"]
 
-def message_de_bienvenue():
+# Base de données des clients (Data Bank)
+clients = [
+    ["1013", "Manuel", "Macaron", 999999, [10000, "2025-10-05", 12000, "2025-10-02"], []],
+    ["1033", "Christian", "Goataldo", 10023, [1300, "2025-10-03", 1200, "2025-10-02"], [200, "2025-09-04"]],
+    ["1023", "Hadrien", "Raisingay", 12, [1, "2025-10-03", 2, "2025-10-01"], [1, "2025-10-06"]],
+    ["1043", "Leon", "Moisi", 0, [1, "2025-10-03", 1, "2025-10-02"], [2, "2025-10-04"]],
+    ["1073", "Marin", "Pêcheur", 1200, [700, "2025-10-01", 600, "2025-10-03"], [300, "2025-10-05"]],
+    ["1063", "Jean", "clenchetasoeur", 8000, [500, "2025-10-02"], [150, "2025-10-04"]],
+    ["1093", "Alban", "Boulard", 1500, [100, "2025-10-03"], [75, "2025-10-04"]],
+    ["1193", "Xi", "jinping", 240000000, [100000, "2025-10-03"], [75000, "2025-10-04"]]
+]
+
+# Fonction qui affiche un message de bienvenue
+def afficher_message_bienvenue():
     print("Bonjour ! Bienvenue au distributeur automatique de billets.")
 
-def entrer_code_pin():
+# Fonction qui demande à l'utilisateur d'entrer un code PIN
+def demander_code_pin():
     while True:
-        demande_id = input("Entrez votre code PIN (ou tapez 'quit' pour quitter) : ")
+        # Demande à l'utilisateur d'entrer son code PIN
+        code_saisi = input("Entrez votre code PIN (ou tapez 'quit' pour quitter) : ")
         
-        if demande_id.lower() in quitting_words:
+        # Si l'utilisateur veut quitter
+        if code_saisi.lower() in quitting_words:
             print("Vous avez quitté le programme, à bientôt !")
             return None
         
         try:
-            code = int(demande_id)
+            # Convertir le code PIN en entier et vérifier s'il est valide
+            code = int(code_saisi)
             if code in pins_valides:
                 print("PIN correct. Accès autorisé.\n")
-                return code  
+                return code
             else:
                 print("PIN incorrect. Réessayez.\n")
-        except:
+        except ValueError:
             print("Vous devez entrer un nombre pour le code PIN.\n")
 
-
-def message_aurevoir()
+# Fonction qui affiche un message de départ
+def afficher_message_aurevoir():
     print("Merci d'avoir utilisé notre DAB, au revoir !")
 
-def déposer_argent(montant)
-    client["depots"].append([montant, today])
-    print("Dépôt effectué avec succès !")
-    print(f" Nouveau solde de {client['prenom']} {client['nom']} : {client['solde']} €")
-
-def get_clients_base():
-    if file_doesnt_exist("clients.json"):
-        clients_dict = make_clients_from_data(raw_clients)
-        save_python_dict_to_json_file(clients_dict, "clients.json")
-    else:
-        clients_dict = make_python_dict_from_json_file("clients.json")
-    return clients_dict
-
-
-
-
-
-
-from databank import *
-import json
-
-def pin_good():
-    pin = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
-    # pour l'instant cette fonction ne fait rien mais on pourra la réutiliser plus tard
-         
-
-def message_de_bienvenue():
-    print("Bonjour ! Bienvenue au distributeur automatique de billets.")
-
-def entrer_code_pin():
-    while True:
-        demande_id = input("Entrez votre code PIN (ou tapez 'quit' pour quitter) : ")
-        
-        if demande_id.lower() in quitting_words:
-            print("Vous avez quitté le programme, à bientôt !")
-            return None
-        
-        try:
-            code = int(demande_id)
-            if code in pins_valides:
-                print("PIN correct. Accès autorisé.\n")
-                return code  
-            else:
-                print("PIN incorrect. Réessayez.\n")
-        except:
-            print("Vous devez entrer un nombre pour le code PIN.\n")
-
-
-def message_aurevoir():
-    print("Merci d'avoir utilisé notre DAB, au revoir !")
-
-def déposer_argent(montant):
-    client["depots"].append([montant, today])
-    print("Dépôt effectué avec succès !")
-    print(f" Nouveau solde de {client['prenom']} {client['nom']} : {client['solde']} €")
-
-def trouver_client_par_pin(pin):
-    for client in clients:
-        if client[0] == str(pin):  # dans databank, les PIN sont des chaînes
-            return client
-    return None
-
-def consulter_solde(client):
+# Fonction qui affiche le solde du client
+def afficher_solde(client):
     prenom = client[1]
     nom = client[2]
     solde = client[3]
     print(f"Solde actuel de {prenom} {nom} : {solde} €\n")
 
-def get_clients_base():
-    if file_doesnt_exist("clients.json"):
-        clients_dict = make_clients_from_data(raw_clients)
-        save_python_dict_to_json_file(clients_dict, "clients.json")
-    else:
-        clients_dict = make_python_dict_from_json_file("clients.json")
-    return clients_dict
+# Fonction qui trouve un client à partir de son code PIN
+def trouver_client_par_pin(pin):
+    for client in clients:
+        if client[0] == str(pin):  # Le PIN est enregistré sous forme de chaîne
+            return client
+    return None
 
-
+# Fonction principale qui contrôle le flux du programme
 def main():
-    message_de_bienvenue()
-
-    pin = entrer_code_pin()
-    if pin is None:  # si l'utilisateur quitte
+    afficher_message_bienvenue()  # Affiche un message de bienvenue
+    
+    pin = demander_code_pin()  # Demande un code PIN à l'utilisateur
+    if pin is None:  # Si l'utilisateur décide de quitter
         return
 
-    client = trouver_client_par_pin(pin)
+    client = trouver_client_par_pin(pin)  # Cherche le client correspondant au code PIN
     if client:
-        consulter_solde(client)
+        afficher_solde(client)  # Affiche le solde du client
     else:
         print("Erreur : client introuvable.\n")
 
-    message_aurevoir()
+    afficher_message_aurevoir()  # Affiche un message de départ
 
-
+# Si ce script est exécuté directement, on appelle la fonction principale
 if __name__ == "__main__":
     main()
+
