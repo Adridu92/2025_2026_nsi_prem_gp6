@@ -4,7 +4,7 @@ from databank import *
 
 def main ():
     montrez_bienvenue_message ()
-    while user_continues:
+    while user_continues(rep):
      entrez_code_pin ()
     if pin_good:
          montrez_menu ()
@@ -73,3 +73,4 @@ def retirer_argent(client):
 
     print(f"Retrait de {montant:.2f} € effectué avec succès.")
     print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")
+ 
