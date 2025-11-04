@@ -20,29 +20,33 @@ clients = [
 
 # Fonction qui affiche un message de bienvenue
 def afficher_message_bienvenue():
-    print("Bonjour ! Bienvenue au distributeur automatique de billets.")
+    print("Bonjour ! Bienvenue au distributeur automatique de billets.\n")
 
 # Fonction qui demande à l'utilisateur d'entrer un code PIN
 def demander_code_pin():
     while True:
-        # Demande à l'utilisateur d'entrer son code PIN
         code_saisi = input("Entrez votre code PIN (ou tapez 'quit' pour quitter) : ")
-        
+
         # Si l'utilisateur veut quitter
         if code_saisi.lower() in quitting_words:
-            print("Vous avez quitté le programme, à bientôt !")
+            print("\nVous avez quitté le programme, à bientôt !")
             return None
-        
-        try:
-            # Convertir le code PIN en entier et vérifier s'il est valide
-            code = int(code_saisi)
-            if code in pins_valides:
-                print("PIN correct. Accès autorisé.\n")
-                return code
-            else:
-                print("PIN incorrect. Réessayez.\n")
-        except ValueError:
-            print("Vous devez entrer un nombre pour le code PIN.\n")
+
+        # Vérifier que c’est bien un nombre
+        if not code_saisi.isdigit():
+            print("\n⚠️ Vous devez entrer un nombre pour le code PIN.\n")
+            continue
+
+        # Convertir en entier pour comparaison
+        code = int(code_saisi)
+
+        # Vérifier si le code est valide
+        if code in pins_valides:
+            print("\n✅ PIN correct. Accès autorisé.\n")
+            return code
+        else:
+            # 🔹 Ici ton message d’erreur apparaît toujours
+            input("\n❌ Le code PIN est mauvais. Réessayez.\n")
 
 # Fonction qui affiche un message de départ
 def afficher_message_aurevoir():
@@ -53,7 +57,7 @@ def afficher_solde(client):
     prenom = client[1]
     nom = client[2]
     solde = client[3]
-    print(f"Solde actuel de {prenom} {nom} : {solde} €\n")
+    print(f"💰 Solde actuel de {prenom} {nom} : {solde} €\n")
 
 # Fonction qui trouve un client à partir de son code PIN
 def trouver_client_par_pin(pin):
@@ -64,21 +68,20 @@ def trouver_client_par_pin(pin):
 
 # Fonction principale qui contrôle le flux du programme
 def main():
-    afficher_message_bienvenue()  # Affiche un message de bienvenue
-    
-    pin = demander_code_pin()  # Demande un code PIN à l'utilisateur
-    if pin is None:  # Si l'utilisateur décide de quitter
+    afficher_message_bienvenue()
+
+    pin = demander_code_pin()
+    if pin is None:
         return
 
-    client = trouver_client_par_pin(pin)  # Cherche le client correspondant au code PIN
+    client = trouver_client_par_pin(pin)
     if client:
-        afficher_solde(client)  # Affiche le solde du client
+        afficher_solde(client)
     else:
         print("Erreur : client introuvable.\n")
 
-    afficher_message_aurevoir()  # Affiche un message de départ
+    afficher_message_aurevoir()
 
 # Si ce script est exécuté directement, on appelle la fonction principale
 if __name__ == "__main__":
     main()
-
