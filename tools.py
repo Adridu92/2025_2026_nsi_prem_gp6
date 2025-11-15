@@ -85,3 +85,24 @@ def main():
 # Si ce script est exécuté directement, on appelle la fonction principale
 if __name__ == "__main__":
     main()
+
+from datetime import date
+
+# Demande du montant en boucle jusqu'à ce qu'il soit valide
+while True:
+    try:
+        montant = float(input("Entrez le montant à déposer : "))
+        if montant <= 0:
+            print("Le montant doit être supérieur à 0.")
+        else:
+            break
+    except ValueError:
+        print("Veuillez entrer un montant valide.")
+
+# Mise à jour du solde et enregistrement du dépôt
+today = str(date.today())
+client[3] += montant
+client[5].append(["dépôt", montant, today])
+
+print(f"Dépôt de {montant:.2f} € effectué avec succès.")
+print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")
