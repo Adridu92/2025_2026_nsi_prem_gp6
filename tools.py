@@ -1,5 +1,7 @@
 import json
+from datetime import date
 import databank
+
 # Liste des codes PIN valides
 pins_valides = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
 # Liste des mots-clés pour quitter le programme
@@ -31,7 +33,7 @@ def demander_code_pin():
             print("\nVous avez quitté le programme, à bientôt !")
             return None
 
-        # Vérifier que c’est bien un nombre
+        # Vérifier que c'est bien un nombre
         if not code_saisi.isdigit():
             print("\n Vous devez entrer un nombre pour le code PIN.\n")
             continue
@@ -44,7 +46,7 @@ def demander_code_pin():
             print("\n PIN correct. Accès autorisé.\n")
             return code
         else:
-            # 🔹 Ici ton message d’erreur apparaît toujours
+            # 🔹 Ici ton message d'erreur apparaît toujours
             input("\n Le code PIN est mauvais. Réessayez.\n")
 
 # Fonction qui affiche un message de départ
@@ -65,6 +67,33 @@ def trouver_client_par_pin(pin):
             return client
     return None
 
+# Fonction pour déposer de l'argent
+def deposer_argent(client):
+    """
+    Fonction pour déposer de l'argent sur le compte client.
+    client : liste [pin, prenom, nom, solde, depots, retraits]
+    """
+    print("=== Dépôt d'argent ===")
+    
+    # Demande du montant en boucle jusqu'à ce qu'il soit valide
+    while True:
+        try:
+            montant = float(input("Entrez le montant à déposer : "))
+            if montant <= 0:
+                print("Le montant doit être supérieur à 0.")
+            else:
+                break
+        except ValueError:
+            print("Veuillez entrer un montant valide.")
+
+    # Mise à jour du solde et enregistrement du dépôt
+    today = str(date.today())
+    client[3] += montant
+    client[4].extend([montant, today])  # Index 4 = dépôts
+
+    print(f"Dépôt de {montant:.2f} € effectué avec succès.")
+    print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")
+
 # Fonction principale qui contrôle le flux du programme
 def main():
     afficher_message_bienvenue()
@@ -84,24 +113,3 @@ def main():
 # Si ce script est exécuté directement, on appelle la fonction principale
 if __name__ == "__main__":
     main()
-
-from datetime import date
-
-# Demande du montant en boucle jusqu'à ce qu'il soit valide
-while True:
-    try:
-        montant = float(input("Entrez le montant à déposer : "))
-        if montant <= 0:
-            print("Le montant doit être supérieur à 0.")
-        else:
-            break
-    except ValueError:
-        print("Veuillez entrer un montant valide.")
-
-# Mise à jour du solde et enregistrement du dépôt
-today = str(date.today())
-client[3] += montant
-client[5].append(["dépôt", montant, today])
-
-print(f"Dépôt de {montant:.2f} € effectué avec succès.")
-print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")            
