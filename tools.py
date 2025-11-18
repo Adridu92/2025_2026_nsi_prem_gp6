@@ -2,7 +2,6 @@ import json
 import databank
 # Liste des codes PIN valides
 pins_valides = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
-
 # Liste des mots-clés pour quitter le programme
 quitting_words = ["quit", "ciao", "byebye", "au revoir", "adios"]
 
@@ -105,4 +104,4 @@ client[3] += montant
 client[5].append(["dépôt", montant, today])
 
 print(f"Dépôt de {montant:.2f} € effectué avec succès.")
-print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")
+print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")            
