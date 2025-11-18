@@ -34,7 +34,7 @@ def demander_code_pin():
 
         # Vérifier que c’est bien un nombre
         if not code_saisi.isdigit():
-            print("\n⚠️ Vous devez entrer un nombre pour le code PIN.\n")
+            print("\n Vous devez entrer un nombre pour le code PIN.\n")
             continue
 
         # Convertir en entier pour comparaison
@@ -42,11 +42,11 @@ def demander_code_pin():
 
         # Vérifier si le code est valide
         if code in pins_valides:
-            print("\n✅ PIN correct. Accès autorisé.\n")
+            print("\n PIN correct. Accès autorisé.\n")
             return code
         else:
             # 🔹 Ici ton message d’erreur apparaît toujours
-            input("\n❌ Le code PIN est mauvais. Réessayez.\n")
+            input("\n Le code PIN est mauvais. Réessayez.\n")
 
 # Fonction qui affiche un message de départ
 def afficher_message_aurevoir():
@@ -57,7 +57,7 @@ def afficher_solde(client):
     prenom = client[1]
     nom = client[2]
     solde = client[3]
-    print(f"💰 Solde actuel de {prenom} {nom} : {solde} €\n")
+    print(f"Solde actuel de {prenom} {nom} : {solde} €\n")
 
 # Fonction qui trouve un client à partir de son code PIN
 def trouver_client_par_pin(pin):
