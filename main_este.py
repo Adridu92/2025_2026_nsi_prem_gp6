@@ -13,10 +13,6 @@ def main ():
 
    
 
-
-
-print "Au revoir !"
-
 from datetime import date
 
 def retirer_argent(client):
