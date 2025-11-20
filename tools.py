@@ -1,4 +1,3 @@
-@ -1,50 +1,52 @@
 import json
 from datetime import date
 import databank
@@ -53,7 +52,20 @@ def demander_code_pin():
             input("\n Le code PIN est mauvais. Réessayez.\n")
 
 # Fonction qui affiche un message de départ
-@ -65,43 +67,49 @@
+def afficher_message_aurevoir():
+    print("Merci d'avoir utilisé notre DAB, au revoir !")
+
+# Fonction qui affiche le solde du client
+def afficher_solde(client):
+    prenom = client[1]
+    nom = client[2]
+    solde = client[3]
+    print(f"Solde actuel de {prenom} {nom} : {solde} €\n")
+
+# Fonction qui trouve un client à partir de son code PIN
+def trouver_client_par_pin(pin):
+    for client in clients:
+        if client[0] == str(pin):  # Le PIN est enregistré sous forme de chaîne
             return client
     return None
 
@@ -102,26 +114,5 @@ def main():
 
 # Si ce script est exécuté directement, on appelle la fonction principale
 if __name__ == "__main__":
-    main()
-
-from datetime import date
-
-# Demande du montant en boucle jusqu'à ce qu'il soit valide
-while True:
-    try:
-        montant = float(input("Entrez le montant à déposer : "))
-        if montant <= 0:
-            print("Le montant doit être supérieur à 0.")
-        else:
-            break
-    except ValueError:
-        print("Veuillez entrer un montant valide.")
-
-# Mise à jour du solde et enregistrement du dépôt
-today = str(date.today())
-client[3] += montant
-client[5].append(["dépôt", montant, today])
-
-print(f"Dépôt de {montant:.2f} € effectué avec succès.")
-print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")            
+ 
     main()
