@@ -4,6 +4,7 @@ import databank
 
 # Liste des codes PIN valides
 pins_valides = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
+
 # Liste des mots-clés pour quitter le programme
 quitting_words = ["quit", "ciao", "byebye", "au revoir", "adios"]
 
@@ -26,28 +27,24 @@ def afficher_message_bienvenue():
 # Fonction qui demande à l'utilisateur d'entrer un code PIN
 def demander_code_pin():
     while True:
+        # Demande à l'utilisateur d'entrer son code PIN
         code_saisi = input("Entrez votre code PIN (ou tapez 'quit' pour quitter) : ")
 
         # Si l'utilisateur veut quitter
         if code_saisi.lower() in quitting_words:
             print("\nVous avez quitté le programme, à bientôt !")
             return None
-
-        # Vérifier que c'est bien un nombre
-        if not code_saisi.isdigit():
-            print("\n Vous devez entrer un nombre pour le code PIN.\n")
-            continue
-
-        # Convertir en entier pour comparaison
-        code = int(code_saisi)
-
-        # Vérifier si le code est valide
-        if code in pins_valides:
-            print("\n PIN correct. Accès autorisé.\n")
-            return code
-        else:
-            # 🔹 Ici ton message d'erreur apparaît toujours
-            input("\n Le code PIN est mauvais. Réessayez.\n")
+        
+        try:
+            # Convertir le code PIN en entier et vérifier s'il est valide
+            code = int(code_saisi)
+            if code in pins_valides:
+                print("PIN correct. Accès autorisé.\n")
+                return code
+            else:
+                print("PIN incorrect. Réessayez.\n")
+        except ValueError:
+            print("Vous devez entrer un nombre pour le code PIN.\n")
 
 # Fonction qui affiche un message de départ
 def afficher_message_aurevoir():
@@ -66,33 +63,6 @@ def trouver_client_par_pin(pin):
         if client[0] == str(pin):  # Le PIN est enregistré sous forme de chaîne
             return client
     return None
-
-# Fonction pour déposer de l'argent
-def deposer_argent(client):
-    """
-    Fonction pour déposer de l'argent sur le compte client.
-    client : liste [pin, prenom, nom, solde, depots, retraits]
-    """
-    print("=== Dépôt d'argent ===")
-    
-    # Demande du montant en boucle jusqu'à ce qu'il soit valide
-    while True:
-        try:
-            montant = float(input("Entrez le montant à déposer : "))
-            if montant <= 0:
-                print("Le montant doit être supérieur à 0.")
-            else:
-                break
-        except ValueError:
-            print("Veuillez entrer un montant valide.")
-
-    # Mise à jour du solde et enregistrement du dépôt
-    today = str(date.today())
-    client[3] += montant
-    client[4].extend([montant, today])  # Index 4 = dépôts
-
-    print(f"Dépôt de {montant:.2f} € effectué avec succès.")
-    print(f"Nouveau solde de {client[1]} {client[2]} : {client[3]:.2f} €\n")
 
 # Fonction principale qui contrôle le flux du programme
 def main():
@@ -113,3 +83,12 @@ def main():
 # Si ce script est exécuté directement, on appelle la fonction principale
 if __name__ == "__main__":
     main()
+
+def menu ():
+    print ("Que voulez-vous faire ?")
+    print ("1 - Consulter mon solde")
+    print ("2 - Déposer de l'argent")
+    print ("3 - Retirer de l'argent")
+
+def user_continues(rep):
+    return rep not in quitting_words
