@@ -15,7 +15,7 @@ def main ():
 
 
 
-print ("Au revoir !")
+print "Au revoir !"
 
 from datetime import date
 
