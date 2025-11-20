@@ -2,17 +2,48 @@ from tools import *
 from databank import *
 
 
-def main ():
-    afficher_message_bienvenue ()
-    while user_continues(n):
-     demander_code_pin ()
-     menu ()
-
+def main():
+    print("Bonjour ! Bienvenue au distributeur automatique de billets.\n")
+    
+    # Demander le code PIN
+    pin = demander_code_pin()
+    
+    # Si l'utilisateur a quitté
+    if pin is None:
+        return
+    
+    # Trouver le client correspondant au PIN
+    client = trouver_client_par_pin(pin)
+    
+    if client:
+        # Afficher le solde
+        afficher_solde(client)
+        
+        # Afficher le menu
+        print("=== Menu ===")
+        print("1. Retirer de l'argent")
+        print("2. Déposer de l'argent")
+        
+        try:
+            choix = float(input("Tapez 1 pour retirer de l'argent, 2 pour en déposer : "))
+            
+            if choix == 1:
+                retirer_argent(client)
+            elif choix == 2:
+                deposer_argent(client)
+            else:
+                print("Choix invalide.\n")
+        except ValueError:
+            print("Erreur : veuillez entrer un nombre valide.\n")
+    else:
+        print("Erreur : client introuvable.\n")
+    
+    afficher_message_aurevoir()
    
 
 
 
-print ("Au revoir !")
+
 
 from datetime import date
 
