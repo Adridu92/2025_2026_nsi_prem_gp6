@@ -3,19 +3,16 @@ from databank import *
 
 
 def main ():
-    montrez_bienvenue_message ()
-    while user_continues(rep):
-     entrez_code_pin ()
-    if pin_good:
-         menu ()
-    else :
-        message_erreur()
+    afficher_message_bienvenue ()
+    while user_continues(n):
+     demander_code_pin ()
+     menu ()
 
    
 
 
 
-print "Au revoir !"
+print ("Au revoir !")
 
 from datetime import date
 

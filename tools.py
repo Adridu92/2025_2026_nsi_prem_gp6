@@ -1,5 +1,5 @@
 import json
-from datetime import date
+
 import databank
 
 # Liste des codes PIN valides
@@ -90,5 +90,5 @@ def menu ():
     print ("2 - Déposer de l'argent")
     print ("3 - Retirer de l'argent")
 
-def user_continues(rep):
-    return rep not in quitting_words
+def user_continues(n):
+    return n not in quitting_words
