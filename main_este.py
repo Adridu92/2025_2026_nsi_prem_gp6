@@ -1,9 +1,11 @@
 from tools import *
 from datetime import date
 
-# -----------------------------
-# RETRAIT D'ARGENT
-# -----------------------------
+#  Partie 3 : Retirer Argent
+#   - Vérifier que le montant demandé est disponible
+#   - Décomposer le montant en billets (ex. 50€, 20€, 10€, 5€)
+#   - Mettre à jour le solde du compte
+
 def retirer_argent(client):
     print("=== Retrait d'argent ===")
     while True:
@@ -33,7 +35,7 @@ def retirer_argent(client):
 
         break
 
-    # Décomposition en billets
+   
     billets = [50, 20, 10, 5]
     reste = montant
     decomposition = {}
@@ -68,14 +70,20 @@ def retirer_argent(client):
 def main():
     afficher_message_bienvenue()
 
-    pin = demander_code_pin()
+# Accueil
+
+    pin = demander_code_pin()        
     if pin is None:
         return
+
+# Partie 1 : S'identifier avec un code PIN
 
     client = trouver_client_par_pin(pin)
     if not client:
         print("Erreur : client introuvable.\n")
         return
+
+# Partie 2 : Consulter le solde disponible du compte
 
     afficher_solde(client)
 
@@ -85,6 +93,8 @@ def main():
 
     while True:
         choix_str = input("Tapez 1 pour retirer, 2 pour déposer : ").strip()
+
+# Partie 5 : Quitter le programme
 
         if choix_str.lower() in quitting_words:
             print("\nVous avez quitté le programme, à bientôt !\n")
@@ -96,14 +106,21 @@ def main():
 
         choix = int(choix_str)
         if choix == 1:
+
+ # Partie 3 : Retirer argent
+
             retirer_argent(client)
             break
         elif choix == 2:
+
+# Partie 4 : Déposer argent
+
             deposer_argent(client)
             break
         else:
             print("Choix invalide. Tapez 1 pour retirer, 2 pour déposer :")
 
+# Partie 5 : Quitter le programme
     afficher_message_aurevoir()
 
 
