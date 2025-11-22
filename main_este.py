@@ -1,30 +1,39 @@
 from tools import *
-from databank import *
 from datetime import date
 
+# -----------------------------
+# RETRAIT D'ARGENT
+# -----------------------------
 def retirer_argent(client):
     print("=== Retrait d'argent ===")
     while True:
         montant_str = input("Entrez le montant à retirer (multiple de 5) : ").strip()
+
         if montant_str.lower() in quitting_words:
-            print("\nVous avez quitté le programme, à bientôt !")
+            print("\nVous avez quitté le programme, à bientôt !\n")
             return
+
         try:
             montant = float(montant_str)
         except ValueError:
             print("Erreur : vous devez entrer un nombre.\n")
             continue
+
         if montant <= 0:
             print("Le montant doit être supérieur à 0.\n")
             continue
+
         if montant % 5 != 0:
-            print("Le montant doit être un multiple de 5 (5,10,20,50…).\n")
+            print("Le montant doit être un multiple de 5 (5, 10, 20, 50...).\n")
             continue
+
         if montant > client[3]:
             print("Fonds insuffisants pour ce retrait.\n")
             continue
+
         break
 
+    # Décomposition en billets
     billets = [50, 20, 10, 5]
     reste = montant
     decomposition = {}
@@ -46,10 +55,16 @@ def retirer_argent(client):
     today = str(date.today())
     client[3] -= montant
     client[5].extend([montant, today])
+
     print(f"\nRetrait de {montant:.2f} € effectué avec succès.")
     print(f"Nouveau solde : {client[3]:.2f} €\n")
+
     sauvegarder_clients()
 
+
+# -----------------------------
+# FONCTION PRINCIPALE
+# -----------------------------
 def main():
     afficher_message_bienvenue()
 
@@ -70,12 +85,15 @@ def main():
 
     while True:
         choix_str = input("Tapez 1 pour retirer, 2 pour déposer : ").strip()
+
         if choix_str.lower() in quitting_words:
-            print("\nVous avez quitté le programme, à bientôt !")
+            print("\nVous avez quitté le programme, à bientôt !\n")
             return
+
         if not choix_str.isdigit():
-            print("Choix invalide. Tapez 1 pour retirer de l'argent, 2 pour en déposer :")
+            print("Choix invalide. Tapez 1 pour retirer, 2 pour déposer :")
             continue
+
         choix = int(choix_str)
         if choix == 1:
             retirer_argent(client)
@@ -84,9 +102,10 @@ def main():
             deposer_argent(client)
             break
         else:
-            print("Choix invalide. Tapez 1 pour retirer de l'argent, 2 pour en déposer :")
+            print("Choix invalide. Tapez 1 pour retirer, 2 pour déposer :")
 
     afficher_message_aurevoir()
+
 
 if __name__ == "__main__":
     main()
