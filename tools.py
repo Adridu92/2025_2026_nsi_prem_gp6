@@ -3,13 +3,12 @@ from datetime import date
 import os
 import databank
 
-# -----------------------------
-# LISTES DE BASE
-# -----------------------------
+
+# CONSIGNE 1 : S'identifier avec un code PIN (fictif et enregistré dans le programme)
 pins_valides = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
 quitting_words = ["quit", "ciao", "byebye", "au revoir", "adios"]
 
-# Charger la base depuis JSON si elle existe, sinon base par défaut
+
 if os.path.exists("databank.json"):
     with open("databank.json", "r") as f:
         clients = json.load(f)
@@ -17,9 +16,9 @@ else:
     clients = databank.clients
 
 
-# -----------------------------
-# FONCTIONS
-# -----------------------------
+
+# FONCTIONS d'interface
+
 def afficher_message_bienvenue():
     print("Bonjour ! Bienvenue au distributeur automatique de billets.\n")
 
@@ -27,6 +26,7 @@ def afficher_message_bienvenue():
 def afficher_message_aurevoir():
     print("Merci d'avoir utilisé notre DAB, au revoir !\n")
 
+# Partie 1 : S'identifier avec un code PIN (fictif et enregistré dans le programme)
 
 def demander_code_pin():
     while True:
@@ -55,6 +55,7 @@ def trouver_client_par_pin(pin):
             return client
     return None
 
+# Partie 2 : Consulter le solde disponible du compte
 
 def afficher_solde(client):
     prenom = client[1]
@@ -62,6 +63,7 @@ def afficher_solde(client):
     solde = client[3]
     print(f"Solde actuel de {prenom} {nom} : {solde:.2f} €\n")
 
+# Partie 4 : Déposer de l'argent et mettre à jour le solde
 
 def deposer_argent(client):
     print("=== Dépôt d'argent ===")
