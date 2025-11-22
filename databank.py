@@ -33,6 +33,9 @@ clients = [
     ]
 ]
 
+
+# Mots-clés pour quitter le programme
 quitting_words = ["quit", "ciao", "byebye", "au revoir", "adios"]
 
+# Liste des codes PIN valides (correspondant aux clients ci-dessus)
 pins_valides = [1013, 1023, 1033, 1043, 1063, 1073, 1093, 1193]
