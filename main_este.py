@@ -2,7 +2,7 @@ from tools import *
 from datetime import date
 
 #  Partie 3 : Retirer Argent
-#   - Vérifier que le montant demandé est disponible
+#   - Vérifier que le montant demandé est disponible1023
 #   - Décomposer le montant en billets (ex. 50€, 20€, 10€, 5€)
 #   - Mettre à jour le solde du compte
 
