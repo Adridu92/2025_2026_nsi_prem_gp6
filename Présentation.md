@@ -1,0 +1,2 @@
+https://www.canva.com/design/DAG5hvil0j4/cKwgHNUav82TlKn1yns5Zg/edit?utm_content=DAG5hvil0j4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+# Canva ne permet pas de conserver les animations de la présentation, ainsi je vous donne le lien pret à être copié collé dans n'importe quel navigateur
